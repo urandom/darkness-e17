@@ -1,0 +1,127 @@
+/* vim: set sw=3: */
+group {
+   name: "e/toolbar/default/base";
+   parts {
+      part {
+         name: "outer_bg";
+         mouse_events: 0;
+         type: RECT;
+         description {
+            state: "default" 0.0;
+            color: 0 0 0 255;
+         }
+      }
+      part {
+         name: "border";
+         mouse_events: 0;
+         type: RECT;
+         description {
+            state: "default" 0.0;
+            color: DARKNESS_DARK_BLUE 100;
+         }
+      }
+      part {
+         name: "inner_bg";
+         mouse_events: 0;
+         type: RECT;
+         description {
+            state: "default" 0.0;
+            rel1.offset: 2 2;
+            rel2.offset: -3 -3;
+            color: 15 15 15 255;
+         }
+      }
+      part {
+         name: "gradient";
+         mouse_events: 0;
+	 type: GRADIENT;
+         description {
+            state: "default" 0.0;
+	    gradient {
+	       spectrum: "blue_glow";
+	       type: "linear";
+	    }
+	    fill {
+	       angle: 0;
+	       spread: 0.5;
+	    }
+         }
+         description {
+            state: "left" 0.0;
+            inherit: "default" 0.0;
+            fill.angle: 90;
+         }
+         description {
+            state: "bottom" 0.0;
+            inherit: "default" 0.0;
+            fill.angle: 180;
+         }
+         description {
+            state: "right" 0.0;
+            inherit: "default" 0.0;
+            fill.angle: 270;
+         }
+      }
+      part {
+         name: "e.swallow.content";
+         type: SWALLOW;
+         description {
+            state: "default" 0.0;
+            rel1.offset: 3 3;
+            rel2.offset: -4 -4;
+         }
+         description {
+            state: "bottom" 0.0;
+            inherit: "default" 0.0;
+            rel1.offset: 3 3;
+            rel2.offset: -4 -4;
+         }
+         description {
+            state: "left" 0.0;
+            inherit: "default" 0.0;
+            rel1.offset: 3 3;
+            rel2.offset: -4 -4;
+         }
+         description {
+            state: "right" 0.0;
+            inherit: "default" 0.0;
+            rel1.offset: 3 3;
+            rel2.offset: -4 -4;
+         }
+      }
+   }
+   programs {
+      program {
+         name: "orient1";
+         signal: "e,state,orientation,top";
+         source: "e";
+         action: STATE_SET "default" 0.0;
+         target: "gradient";
+         target: "e.swallow.content";
+      }
+      program {
+         name: "orient2";
+         signal: "e,state,orientation,bottom";
+         source: "e";
+         action: STATE_SET "bottom" 0.0;
+         target: "gradient";
+         target: "e.swallow.content";
+      }
+      program {
+         name: "orient3";
+         signal: "e,state,orientation,left";
+         source: "e";
+         action: STATE_SET "left" 0.0;
+         target: "gradient";
+         target: "e.swallow.content";
+      }
+      program {
+         name: "orient4";
+         signal: "e,state,orientation,right";
+         source: "e";
+         action: STATE_SET "right" 0.0;
+         target: "gradient";
+         target: "e.swallow.content";
+      }
+   }
+}
